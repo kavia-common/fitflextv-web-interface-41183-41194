@@ -3,9 +3,23 @@ import category_yoga_jpg from './category_yoga.jpg';
 import category_hiit_jpg from './category_hiit.jpg';
 import category_strength_jpg from './category_strength.jpg';
 import category_pilates_jpg from './category_pilates.jpg';
+
+/* New category placeholders (royalty-free placeholders can be swapped with real files later) */
+import category_cardio_jpg from './category_cardio.jpg';
+import category_mobility_jpg from './category_mobility.jpg';
+import category_dance_jpg from './category_dance.jpg';
+import category_crossfit_jpg from './category_crossfit.jpg';
+
+/* Existing video thumbs */
 import video_thumb_1_jpg from './video_thumb_1.jpg';
 import video_thumb_2_jpg from './video_thumb_2.jpg';
 import video_thumb_3_jpg from './video_thumb_3.jpg';
+
+/* New video thumbs */
+import video_thumb_4_jpg from './video_thumb_4.jpg';
+import video_thumb_5_jpg from './video_thumb_5.jpg';
+import video_thumb_6_jpg from './video_thumb_6.jpg';
+import video_thumb_7_jpg from './video_thumb_7.jpg';
 
 /**
  * PUBLIC_INTERFACE
@@ -29,9 +43,22 @@ export const catYoga = category_yoga_jpg || FALLBACK_JPEG;
 export const catHiit = category_hiit_jpg || FALLBACK_JPEG;
 export const catStrength = category_strength_jpg || FALLBACK_JPEG;
 export const catPilates = category_pilates_jpg || FALLBACK_JPEG;
+
+/* New category exports */
+export const catCardio = category_cardio_jpg || FALLBACK_JPEG;
+export const catMobility = category_mobility_jpg || FALLBACK_JPEG;
+export const catDance = category_dance_jpg || FALLBACK_JPEG;
+export const catCrossfit = category_crossfit_jpg || FALLBACK_JPEG;
+
+/* Video thumbs */
 export const vid1 = video_thumb_1_jpg || FALLBACK_JPEG;
 export const vid2 = video_thumb_2_jpg || FALLBACK_JPEG;
 export const vid3 = video_thumb_3_jpg || FALLBACK_JPEG;
+/* New video thumbs */
+export const vid4 = video_thumb_4_jpg || FALLBACK_JPEG;
+export const vid5 = video_thumb_5_jpg || FALLBACK_JPEG;
+export const vid6 = video_thumb_6_jpg || FALLBACK_JPEG;
+export const vid7 = video_thumb_7_jpg || FALLBACK_JPEG;
 
 // Default export for convenience
 export default {
@@ -40,7 +67,15 @@ export default {
   catHiit,
   catStrength,
   catPilates,
+  catCardio,
+  catMobility,
+  catDance,
+  catCrossfit,
   vid1,
   vid2,
   vid3,
+  vid4,
+  vid5,
+  vid6,
+  vid7,
 };

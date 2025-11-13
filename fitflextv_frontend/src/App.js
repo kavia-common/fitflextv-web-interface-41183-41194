@@ -1,5 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import { heroFitness, catYoga, catHiit, catStrength, catPilates, vid1, vid2, vid3 } from './assets/images';
+import {
+  heroFitness,
+  catYoga,
+  catHiit,
+  catStrength,
+  catPilates,
+  catCardio,
+  catMobility,
+  catDance,
+  catCrossfit,
+  vid1,
+  vid2,
+  vid3,
+  vid4,
+  vid5,
+  vid6,
+  vid7,
+} from './assets/images';
 
 // Tiny valid JPEG as deterministic inline fallback for the hero image (ensures at least one visible image)
 const HERO_DATA_URI =
@@ -34,7 +51,7 @@ function App() {
   // Sidebar state (mobile collapsible)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
-  const categories = ['All', 'HIIT', 'Yoga', 'Strength', 'Cardio', 'Pilates'];
+  const categories = ['All', 'HIIT', 'Yoga', 'Strength', 'Cardio', 'Pilates', 'Mobility', 'Dance', 'CrossFit'];
 
   // Images for top-level categories we are wiring
   const categoryImages = [
@@ -42,6 +59,10 @@ function App() {
     { key: 'HIIT', src: catHiit, alt: 'HIIT category thumbnail' },
     { key: 'Strength', src: catStrength, alt: 'Strength category thumbnail' },
     { key: 'Pilates', src: catPilates, alt: 'Pilates category thumbnail' },
+    { key: 'Cardio', src: catCardio, alt: 'Cardio category thumbnail' },
+    { key: 'Mobility', src: catMobility, alt: 'Mobility category thumbnail' },
+    { key: 'Dance', src: catDance, alt: 'Dance category thumbnail' },
+    { key: 'CrossFit', src: catCrossfit, alt: 'CrossFit category thumbnail' },
   ];
 
   // Container and layout styles
@@ -482,7 +503,7 @@ function App() {
     },
     catThumb: {
       width: '100%',
-      aspectRatio: '16 / 9',
+      aspectRatio: '1 / 1',
       overflow: 'hidden',
     },
     catImg: {
@@ -523,6 +544,10 @@ function App() {
     { title: 'HIIT Blast 20', category: 'HIIT', duration: '20:00', img: vid1 },
     { title: 'Morning Flow', category: 'Yoga', duration: '15:32', img: vid2 },
     { title: 'Core Crusher', category: 'Strength', duration: '18:45', img: vid3 },
+    { title: 'Cardio Burn', category: 'Cardio', duration: '22:10', img: vid4 },
+    { title: 'Mobility Reset', category: 'Mobility', duration: '12:58', img: vid5 },
+    { title: 'Dance Groove', category: 'Dance', duration: '17:05', img: vid6 },
+    { title: 'CrossFit Power', category: 'CrossFit', duration: '25:40', img: vid7 },
   ];
 
   return (
@@ -743,7 +768,7 @@ function App() {
               >
                 {categoryImages.map((c) => (
                   <article key={c.key} style={styles.catCard} aria-label={`${c.key} category`}>
-                    <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <div style={{ ...styles.catThumb, aspectRatio: '1 / 1' }}>
                       <img
                         src={c.src}
                         alt={c.alt}
