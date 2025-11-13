@@ -1,23 +1,14 @@
 import React, { useMemo, useState } from 'react';
+import { heroFitness, catYoga, catHiit, catStrength, catPilates, vid1, vid2, vid3 } from './assets/images';
 
 /**
  * PUBLIC_INTERFACE
- * App - FitFlexTV-styled UI with responsive, collapsible category sidebar
+ * App - FitFlexTV-styled UI with responsive, collapsible category sidebar and local images.
  *
- * Self-contained implementation using only React and inline styles (CSS-in-JS).
- * Ocean Professional theme:
- *  - primary:   #2563EB
- *  - secondary: #F59E0B
- *  - background:#f9fafb
- *  - surface:   #ffffff
- *  - text:      #111827
- *
- * Includes:
- *  - Top navbar (kept from original)
- *  - Left sidebar for categories on desktop
- *  - Mobile toggle button to collapse/expand the sidebar
- *  - Existing hero preserved on the right content area
- *  - Featured Workouts grid and Quick Stats strip under the hero
+ * Showcases:
+ *  - Hero banner using hero_fitness.jpg
+ *  - Categories thumbnails (Yoga, HIIT, Strength, Pilates)
+ *  - Featured video cards using local thumbnails
  */
 function App() {
   // Theme palette constants
@@ -40,6 +31,14 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
   const categories = ['All', 'HIIT', 'Yoga', 'Strength', 'Cardio', 'Pilates'];
+
+  // Images for top-level categories we are wiring
+  const categoryImages = [
+    { key: 'Yoga', src: catYoga, alt: 'Yoga category thumbnail' },
+    { key: 'HIIT', src: catHiit, alt: 'HIIT category thumbnail' },
+    { key: 'Strength', src: catStrength, alt: 'Strength category thumbnail' },
+    { key: 'Pilates', src: catPilates, alt: 'Pilates category thumbnail' },
+  ];
 
   // Container and layout styles
   const styles = {
@@ -304,18 +303,19 @@ function App() {
       transform: 'translateY(-1px)',
     },
     heroRight: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: `linear-gradient(135deg, ${colors.primary}12, ${colors.secondary}12)`,
-      border: `1px dashed ${colors.border}`,
+      position: 'relative',
+      overflow: 'hidden',
       borderRadius: 14,
       minHeight: 220,
-      padding: 16,
-      textAlign: 'center',
-      color: colors.textMuted,
-      fontSize: 14,
-      fontWeight: 600,
+      border: `1px solid ${colors.border}`,
+      boxShadow: `0 8px 20px ${colors.shadow}`,
+    },
+    heroImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      display: 'block',
+      borderRadius: 14,
     },
     footerHint: {
       marginTop: 18,
@@ -323,7 +323,7 @@ function App() {
       color: colors.textMuted,
     },
 
-    // Featured workouts section
+    // Section + grids
     section: {
       width: '100%',
       marginTop: 20,
@@ -347,7 +347,6 @@ function App() {
       fontSize: 14,
       color: colors.textMuted,
     },
-    // Grid + cards
     gridWrap: {
       display: 'grid',
       gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
@@ -377,8 +376,16 @@ function App() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      overflow: 'hidden',
+    },
+    posterImg: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      display: 'block',
     },
     playIcon: {
+      position: 'absolute',
       width: 0,
       height: 0,
       borderTop: '10px solid transparent',
@@ -454,6 +461,38 @@ function App() {
       fontWeight: 900,
       color: colors.text,
     },
+    // Category thumbs grid
+    catGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+      gap: 12,
+    },
+    catCard: {
+      backgroundColor: colors.surface,
+      border: `1px solid ${colors.border}`,
+      borderRadius: 12,
+      overflow: 'hidden',
+      boxShadow: `0 6px 16px ${colors.shadow}`,
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    catThumb: {
+      width: '100%',
+      aspectRatio: '16 / 9',
+      overflow: 'hidden',
+    },
+    catImg: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      display: 'block',
+    },
+    catTitle: {
+      padding: '10px 12px',
+      margin: 0,
+      fontSize: 14,
+      fontWeight: 800,
+    },
   };
 
   // A simple hover handler to apply hover styles inline
@@ -475,14 +514,11 @@ function App() {
       ? { ...styles.categoryItem, ...styles.categoryItemActive }
       : styles.categoryItem;
 
-  // Mock poster data
+  // Poster data with local thumbnails
   const posters = [
-    { title: 'HIIT Blast 20', category: 'HIIT', duration: '20:00' },
-    { title: 'Morning Flow', category: 'Yoga', duration: '15:32' },
-    { title: 'Core Crusher', category: 'Strength', duration: '18:45' },
-    { title: 'Cardio Burn', category: 'Cardio', duration: '22:18' },
-    { title: 'Full Body Tone', category: 'Strength', duration: '25:10' },
-    { title: 'Pilates Power', category: 'Pilates', duration: '16:20' },
+    { title: 'HIIT Blast 20', category: 'HIIT', duration: '20:00', img: vid1 },
+    { title: 'Morning Flow', category: 'Yoga', duration: '15:32', img: vid2 },
+    { title: 'Core Crusher', category: 'Strength', duration: '18:45', img: vid3 },
   ];
 
   return (
@@ -512,12 +548,18 @@ function App() {
             .stats-grid {
               grid-template-columns: 1fr 1fr 1fr !important;
             }
+            .cat-grid {
+              grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+            }
           }
           @media (max-width: 640px) {
             .featured-grid {
               grid-template-columns: 1fr !important;
             }
             .stats-grid {
+              grid-template-columns: 1fr !important;
+            }
+            .cat-grid {
               grid-template-columns: 1fr !important;
             }
           }
@@ -656,10 +698,33 @@ function App() {
                   UI — navigation links are non-functional for now.
                 </p>
               </div>
-              <div style={styles.heroRight}>
-                Future content area:
-                <br />
-                video previews, categories, and quick stats.
+              <div style={styles.heroRight} aria-label="Hero Image">
+                <img
+                  src={heroFitness}
+                  alt="Person training - FitFlexTV Hero"
+                  style={styles.heroImage}
+                />
+              </div>
+            </section>
+
+            {/* Categories Thumbnails Section */}
+            <section style={styles.section} aria-label="Browse by Category">
+              <div style={styles.sectionHeader}>
+                <h2 style={styles.sectionTitle}>Browse by Category</h2>
+                <p style={styles.sectionSubtitle}>
+                  Discover workouts across popular categories.
+                </p>
+              </div>
+
+              <div className="cat-grid" style={styles.catGrid}>
+                {categoryImages.map((c) => (
+                  <article key={c.key} style={styles.catCard} aria-label={`${c.key} category`}>
+                    <div style={styles.catThumb}>
+                      <img src={c.src} alt={c.alt} style={styles.catImg} />
+                    </div>
+                    <h3 style={styles.catTitle}>{c.key}</h3>
+                  </article>
+                ))}
               </div>
             </section>
 
@@ -678,44 +743,38 @@ function App() {
                 role="list"
                 aria-label="Workout Posters"
               >
-                {posters.map((p, idx) => {
-                  // Alternate subtle background accents for placeholder posters
-                  const posterBg =
-                    idx % 2 === 0
-                      ? `linear-gradient(135deg, ${colors.primary}22, ${colors.secondary}22)`
-                      : `linear-gradient(135deg, ${colors.secondary}22, ${colors.primary}22)`;
-                  return (
-                    <article
-                      key={p.title}
-                      role="listitem"
-                      aria-label={`${p.title} ${p.category} ${p.duration}`}
-                      {...withHover({ ...styles.card }, styles.cardHover)}
-                    >
-                      <div style={{ ...styles.poster, background: posterBg }}>
-                        <div style={styles.playIcon} aria-hidden="true" />
-                        <span style={styles.durationBadge} aria-label="Duration">
-                          {p.duration}
+                {posters.map((p) => (
+                  <article
+                    key={p.title}
+                    role="listitem"
+                    aria-label={`${p.title} ${p.category} ${p.duration}`}
+                    {...withHover({ ...styles.card }, styles.cardHover)}
+                  >
+                    <div style={styles.poster}>
+                      <img src={p.img} alt={`${p.title} thumbnail`} style={styles.posterImg} />
+                      <div style={styles.playIcon} aria-hidden="true" />
+                      <span style={styles.durationBadge} aria-label="Duration">
+                        {p.duration}
+                      </span>
+                    </div>
+                    <div style={styles.cardBody}>
+                      <h3 style={styles.cardTitle}>{p.title}</h3>
+                      <div style={styles.tagRow}>
+                        <span style={styles.tag}>{p.category}</span>
+                        <span
+                          style={{
+                            ...styles.tag,
+                            backgroundColor: `${colors.secondary}14`,
+                            color: colors.secondary,
+                            border: `1px solid ${colors.secondary}33`,
+                          }}
+                        >
+                          Popular
                         </span>
                       </div>
-                      <div style={styles.cardBody}>
-                        <h3 style={styles.cardTitle}>{p.title}</h3>
-                        <div style={styles.tagRow}>
-                          <span style={styles.tag}>{p.category}</span>
-                          <span
-                            style={{
-                              ...styles.tag,
-                              backgroundColor: `${colors.secondary}14`,
-                              color: colors.secondary,
-                              border: `1px solid ${colors.secondary}33`,
-                            }}
-                          >
-                            Popular
-                          </span>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
+                    </div>
+                  </article>
+                ))}
               </div>
 
               {/* Quick Stats Strip */}
