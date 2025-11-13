@@ -1,6 +1,7 @@
-Placeholders have been migrated.
+# Public Images
 
-Images are now served from public/images for deterministic paths:
+This directory serves static image assets at deterministic URLs via CRA:
+
 - /images/hero_fitness.jpg
 - /images/category_yoga.jpg
 - /images/category_hiit.jpg
@@ -18,8 +19,6 @@ Images are now served from public/images for deterministic paths:
 - /images/video_thumb_6.jpg
 - /images/video_thumb_7.jpg
 
-Update components to reference them with:
+Usage in components:
   const img = (p) => `${process.env.PUBLIC_URL || ''}${p}`;
-  <img src={img('/images/...')} loading="lazy" decoding="async" style={{ objectFit: 'cover', aspectRatio: '16 / 9' }} />
-
-Do not import from 'src/assets/images' going forward.
+  <img src={img('/images/category_yoga.jpg')} loading="lazy" decoding="async" style={{ objectFit: 'cover' }} alt="Yoga" />

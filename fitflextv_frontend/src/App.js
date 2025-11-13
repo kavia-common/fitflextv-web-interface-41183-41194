@@ -1,22 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import {
-  heroFitness,
-  catYoga,
-  catHiit,
-  catStrength,
-  catPilates,
-  catCardio,
-  catMobility,
-  catDance,
-  catCrossfit,
-  vid1,
-  vid2,
-  vid3,
-  vid4,
-  vid5,
-  vid6,
-  vid7,
-} from './assets/images';
 
 // Tiny valid JPEG as deterministic inline fallback for the hero image (ensures at least one visible image)
 const HERO_DATA_URI =
@@ -53,16 +35,19 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const categories = ['All', 'HIIT', 'Yoga', 'Strength', 'Cardio', 'Pilates', 'Mobility', 'Dance', 'CrossFit'];
 
+  // Public image base (CRA will serve from /public)
+  const img = (p) => `${process.env.PUBLIC_URL || ''}${p}`;
+
   // Images for top-level categories we are wiring
   const categoryImages = [
-    { key: 'Yoga', src: catYoga, alt: 'Yoga category thumbnail' },
-    { key: 'HIIT', src: catHiit, alt: 'HIIT category thumbnail' },
-    { key: 'Strength', src: catStrength, alt: 'Strength category thumbnail' },
-    { key: 'Pilates', src: catPilates, alt: 'Pilates category thumbnail' },
-    { key: 'Cardio', src: catCardio, alt: 'Cardio category thumbnail' },
-    { key: 'Mobility', src: catMobility, alt: 'Mobility category thumbnail' },
-    { key: 'Dance', src: catDance, alt: 'Dance category thumbnail' },
-    { key: 'CrossFit', src: catCrossfit, alt: 'CrossFit category thumbnail' },
+    { key: 'Yoga', src: img('/images/category_yoga.jpg'), alt: 'Yoga category thumbnail' },
+    { key: 'HIIT', src: img('/images/category_hiit.jpg'), alt: 'HIIT category thumbnail' },
+    { key: 'Strength', src: img('/images/category_strength.jpg'), alt: 'Strength category thumbnail' },
+    { key: 'Pilates', src: img('/images/category_pilates.jpg'), alt: 'Pilates category thumbnail' },
+    { key: 'Cardio', src: img('/images/category_cardio.jpg'), alt: 'Cardio category thumbnail' },
+    { key: 'Mobility', src: img('/images/category_mobility.jpg'), alt: 'Mobility category thumbnail' },
+    { key: 'Dance', src: img('/images/category_dance.jpg'), alt: 'Dance category thumbnail' },
+    { key: 'CrossFit', src: img('/images/category_crossfit.jpg'), alt: 'CrossFit category thumbnail' },
   ];
 
   // Container and layout styles
@@ -541,13 +526,13 @@ function App() {
 
   // Poster data with local thumbnails
   const posters = [
-    { title: 'HIIT Blast 20', category: 'HIIT', duration: '20:00', img: vid1 },
-    { title: 'Morning Flow', category: 'Yoga', duration: '15:32', img: vid2 },
-    { title: 'Core Crusher', category: 'Strength', duration: '18:45', img: vid3 },
-    { title: 'Cardio Burn', category: 'Cardio', duration: '22:10', img: vid4 },
-    { title: 'Mobility Reset', category: 'Mobility', duration: '12:58', img: vid5 },
-    { title: 'Dance Groove', category: 'Dance', duration: '17:05', img: vid6 },
-    { title: 'CrossFit Power', category: 'CrossFit', duration: '25:40', img: vid7 },
+    { title: 'HIIT Blast 20', category: 'HIIT', duration: '20:00', img: img('/images/video_thumb_1.jpg') },
+    { title: 'Morning Flow', category: 'Yoga', duration: '15:32', img: img('/images/video_thumb_2.jpg') },
+    { title: 'Core Crusher', category: 'Strength', duration: '18:45', img: img('/images/video_thumb_3.jpg') },
+    { title: 'Cardio Burn', category: 'Cardio', duration: '22:10', img: img('/images/video_thumb_4.jpg') },
+    { title: 'Mobility Reset', category: 'Mobility', duration: '12:58', img: img('/images/video_thumb_5.jpg') },
+    { title: 'Dance Groove', category: 'Dance', duration: '17:05', img: img('/images/video_thumb_6.jpg') },
+    { title: 'CrossFit Power', category: 'CrossFit', duration: '25:40', img: img('/images/video_thumb_7.jpg') },
   ];
 
   return (
@@ -736,7 +721,7 @@ function App() {
                 aria-label="Hero Image"
               >
                 <img
-                  src={heroFitness || HERO_DATA_URI}
+                  src={`${process.env.PUBLIC_URL || ''}/images/hero_fitness.jpg`}
                   alt="Person training - FitFlexTV Hero"
                   style={{
                     ...styles.heroImage,
@@ -746,6 +731,7 @@ function App() {
                   }}
                   // Keep eager/default loading for hero as above-the-fold
                   decoding="sync"
+                  onError={(e) => { e.currentTarget.src = HERO_DATA_URI; }}
                 />
               </div>
             </section>
