@@ -798,6 +798,77 @@ function App() {
                 </div>
               </div>
             </section>
+
+            {/* Debug: Image Assets Preview to verify paths/imports */}
+            <section style={{ ...styles.section, marginTop: 28 }} aria-label="Debug: Image Assets Preview">
+              <div style={styles.sectionHeader}>
+                <h2 style={styles.sectionTitle}>Debug: Image Assets Preview</h2>
+                <p style={styles.sectionSubtitle}>
+                  This preview renders all local images to verify visibility and correct bundling.
+                </p>
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+                  gap: 12,
+                }}
+              >
+                {/* Hero image */}
+                <article style={styles.catCard}>
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img loading="lazy" src={heroFitness} alt="Hero fitness debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>hero_fitness.jpg</h3>
+                </article>
+
+                {/* Category thumbnails */}
+                <article style={styles.catCard}>
+                  <div style={styles.catThumb}>
+                    <img loading="lazy" src={catYoga} alt="Category yoga debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>category_yoga.jpg</h3>
+                </article>
+                <article style={styles.catCard}>
+                  <div style={styles.catThumb}>
+                    <img loading="lazy" src={catHiit} alt="Category HIIT debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>category_hiit.jpg</h3>
+                </article>
+                <article style={styles.catCard}>
+                  <div style={styles.catThumb}>
+                    <img loading="lazy" src={catStrength} alt="Category strength debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>category_strength.jpg</h3>
+                </article>
+                <article style={styles.catCard}>
+                  <div style={styles.catThumb}>
+                    <img loading="lazy" src={catPilates} alt="Category pilates debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>category_pilates.jpg</h3>
+                </article>
+
+                {/* Video thumbnails */}
+                <article style={styles.catCard}>
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img loading="lazy" src={vid1} alt="Video thumb 1 debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>video_thumb_1.jpg</h3>
+                </article>
+                <article style={styles.catCard}>
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img loading="lazy" src={vid2} alt="Video thumb 2 debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>video_thumb_2.jpg</h3>
+                </article>
+                <article style={styles.catCard}>
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img loading="lazy" src={vid3} alt="Video thumb 3 debug" style={styles.catImg} />
+                  </div>
+                  <h3 style={styles.catTitle}>video_thumb_3.jpg</h3>
+                </article>
+              </div>
+            </section>
           </div>
         </main>
       </div>
