@@ -1,0 +1,2 @@
+Run "npm run fix:zero-images" to generate a current report.
+This file will be overwritten with a summary of replacements and skipped files.
