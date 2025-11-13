@@ -698,11 +698,25 @@ function App() {
                   UI — navigation links are non-functional for now.
                 </p>
               </div>
-              <div style={styles.heroRight} aria-label="Hero Image">
+              <div
+                style={{
+                  ...styles.heroRight,
+                  // Maintain ~16:9 aspect ratio for hero image container
+                  aspectRatio: '16 / 9',
+                }}
+                aria-label="Hero Image"
+              >
                 <img
                   src={heroFitness}
                   alt="Person training - FitFlexTV Hero"
-                  style={styles.heroImage}
+                  style={{
+                    ...styles.heroImage,
+                    maxWidth: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  // Keep eager/default loading for hero as above-the-fold
+                  decoding="sync"
                 />
               </div>
             </section>
@@ -716,11 +730,28 @@ function App() {
                 </p>
               </div>
 
-              <div className="cat-grid" style={styles.catGrid}>
+              <div
+                className="cat-grid"
+                style={{
+                  ...styles.catGrid,
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+                }}
+              >
                 {categoryImages.map((c) => (
                   <article key={c.key} style={styles.catCard} aria-label={`${c.key} category`}>
-                    <div style={styles.catThumb}>
-                      <img src={c.src} alt={c.alt} style={styles.catImg} />
+                    <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                      <img
+                        src={c.src}
+                        alt={c.alt}
+                        style={{
+                          ...styles.catImg,
+                          maxWidth: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                     <h3 style={styles.catTitle}>{c.key}</h3>
                   </article>
@@ -739,7 +770,10 @@ function App() {
 
               <div
                 className="featured-grid"
-                style={{ ...styles.gridWrap }}
+                style={{
+                  ...styles.gridWrap,
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                }}
                 role="list"
                 aria-label="Workout Posters"
               >
@@ -750,8 +784,19 @@ function App() {
                     aria-label={`${p.title} ${p.category} ${p.duration}`}
                     {...withHover({ ...styles.card }, styles.cardHover)}
                   >
-                    <div style={styles.poster}>
-                      <img src={p.img} alt={`${p.title} thumbnail`} style={styles.posterImg} />
+                    <div style={{ ...styles.poster, aspectRatio: '16 / 9' }}>
+                      <img
+                        src={p.img}
+                        alt={`${p.title} thumbnail`}
+                        style={{
+                          ...styles.posterImg,
+                          maxWidth: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                        loading="lazy"
+                        decoding="async"
+                      />
                       <div style={styles.playIcon} aria-hidden="true" />
                       <span style={styles.durationBadge} aria-label="Duration">
                         {p.duration}
@@ -800,7 +845,10 @@ function App() {
             </section>
 
             {/* Debug: Image Assets Preview to verify paths/imports */}
-            <section style={{ ...styles.section, marginTop: 28 }} aria-label="Debug: Image Assets Preview">
+            <section
+              style={{ ...styles.section, marginTop: 28 }}
+              aria-label="Debug: Image Assets Preview"
+            >
               <div style={styles.sectionHeader}>
                 <h2 style={styles.sectionTitle}>Debug: Image Assets Preview</h2>
                 <p style={styles.sectionSubtitle}>
@@ -810,40 +858,95 @@ function App() {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
                   gap: 12,
                 }}
               >
                 {/* Hero image */}
                 <article style={styles.catCard}>
                   <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
-                    <img loading="lazy" src={heroFitness} alt="Hero fitness debug" style={styles.catImg} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={heroFitness}
+                      alt="Hero fitness debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>hero_fitness.jpg</h3>
                 </article>
 
                 {/* Category thumbnails */}
                 <article style={styles.catCard}>
-                  <div style={styles.catThumb}>
-                    <img loading="lazy" src={catYoga} alt="Category yoga debug" style={styles.catImg} />
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={catYoga}
+                      alt="Category yoga debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>category_yoga.jpg</h3>
                 </article>
                 <article style={styles.catCard}>
-                  <div style={styles.catThumb}>
-                    <img loading="lazy" src={catHiit} alt="Category HIIT debug" style={styles.catImg} />
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={catHiit}
+                      alt="Category HIIT debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>category_hiit.jpg</h3>
                 </article>
                 <article style={styles.catCard}>
-                  <div style={styles.catThumb}>
-                    <img loading="lazy" src={catStrength} alt="Category strength debug" style={styles.catImg} />
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={catStrength}
+                      alt="Category strength debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>category_strength.jpg</h3>
                 </article>
                 <article style={styles.catCard}>
-                  <div style={styles.catThumb}>
-                    <img loading="lazy" src={catPilates} alt="Category pilates debug" style={styles.catImg} />
+                  <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={catPilates}
+                      alt="Category pilates debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>category_pilates.jpg</h3>
                 </article>
@@ -851,19 +954,52 @@ function App() {
                 {/* Video thumbnails */}
                 <article style={styles.catCard}>
                   <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
-                    <img loading="lazy" src={vid1} alt="Video thumb 1 debug" style={styles.catImg} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={vid1}
+                      alt="Video thumb 1 debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>video_thumb_1.jpg</h3>
                 </article>
                 <article style={styles.catCard}>
                   <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
-                    <img loading="lazy" src={vid2} alt="Video thumb 2 debug" style={styles.catImg} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={vid2}
+                      alt="Video thumb 2 debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>video_thumb_2.jpg</h3>
                 </article>
                 <article style={styles.catCard}>
                   <div style={{ ...styles.catThumb, aspectRatio: '16 / 9' }}>
-                    <img loading="lazy" src={vid3} alt="Video thumb 3 debug" style={styles.catImg} />
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={vid3}
+                      alt="Video thumb 3 debug"
+                      style={{
+                        ...styles.catImg,
+                        maxWidth: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
                   </div>
                   <h3 style={styles.catTitle}>video_thumb_3.jpg</h3>
                 </article>
