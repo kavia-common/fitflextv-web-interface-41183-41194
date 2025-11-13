@@ -766,6 +766,7 @@ function App() {
                         }}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) => { e.currentTarget.src = HERO_DATA_URI; }}
                       />
                     </div>
                     <h3 style={styles.catTitle}>{c.key}</h3>
@@ -811,6 +812,7 @@ function App() {
                         }}
                         loading="lazy"
                         decoding="async"
+                        onError={(e) => { e.currentTarget.src = HERO_DATA_URI; }}
                       />
                       <div style={styles.playIcon} aria-hidden="true" />
                       <span style={styles.durationBadge} aria-label="Duration">
