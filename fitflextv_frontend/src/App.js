@@ -27,9 +27,7 @@ function App() {
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>FitFlexTV Dashboard</h1>
         <p>
           Current theme: <strong>{theme}</strong>
         </p>
