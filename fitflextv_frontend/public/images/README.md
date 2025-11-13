@@ -1,24 +1,12 @@
 # Public Images
 
-This directory serves static image assets at deterministic URLs via CRA:
+This folder contains royalty-free, programmatically generated placeholder images used by the app until real assets are provided.
 
-- /images/hero_fitness.jpg
-- /images/category_yoga.jpg
-- /images/category_hiit.jpg
-- /images/category_strength.jpg
-- /images/category_pilates.jpg
-- /images/category_cardio.jpg
-- /images/category_mobility.jpg
-- /images/category_dance.jpg
-- /images/category_crossfit.jpg
-- /images/video_thumb_1.jpg
-- /images/video_thumb_2.jpg
-- /images/video_thumb_3.jpg
-- /images/video_thumb_4.jpg
-- /images/video_thumb_5.jpg
-- /images/video_thumb_6.jpg
-- /images/video_thumb_7.jpg
-
-Usage in components:
-  const img = (p) => `${process.env.PUBLIC_URL || ''}${p}`;
-  <img src={img('/images/category_yoga.jpg')} loading="lazy" decoding="async" style={{ objectFit: 'cover' }} alt="Yoga" />
+Notes:
+- Filenames match existing references in code (do not rename).
+- Dimensions:
+  - Category images: ~800x600 (JPEG)
+  - Video thumbs: ~800x450 (JPEG, 16:9)
+  - placeholder_default.png: generic PNG fallback used by the helper script
+- These files are simple gradients/solids with readable overlay labels (e.g., "Cardio", "Crossfit", "Video 4").
+- You can replace any of these with real images at any time; keep filenames to avoid code changes.
